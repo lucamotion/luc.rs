@@ -1,0 +1,35 @@
+---
+import styles from "./Sidebar.module.css";
+import Socials from "./Socials.astro";
+import Signature from "../images/signature.svg";
+import pfpImage from "../images/pfp.webp";
+import { Image } from "astro:assets";
+
+type Props = { homeButton?: boolean };
+const props = Astro.props;
+---
+
+<section class={styles["meta-column"]}>
+  <section class={styles["icon-container"]}>
+    <Image
+      src={pfpImage}
+      alt="Art by 徐尤点"
+      class={styles["icon"]}
+      draggable={false}
+      loading="eager"
+    />
+    <p class={styles["icon-credit"]}>
+      <span>cr.</span>
+      <a
+        href="https://t.bilibili.com/576877119322818935"
+        draggable={false}
+        target="_blank"
+        rel="noopener noreferrer">徐尤点</a
+      >
+    </p>
+  </section>
+  {props.homeButton ? <a href="/" class={styles["home"]}>← home</a> : <></>}
+  <Socials />
+  <Signature class={styles["signature"]} />
+  <!-- <button id="top-button">Top</button> -->
+</section>

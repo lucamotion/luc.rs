@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from "astro:content";
+import styles from "./Article.module.css";
+import globalStyles from "../styles/global.module.css";
+import "@fontsource/zcool-xiaowei";
+import "@fontsource/monomakh";
+import Sidebar from "../components/Sidebar.astro";
+
+type Props = CollectionEntry<"blog">["data"];
+const { title, pubDate } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>luc.rs | {title}</title>
+    <script>
+      function top() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      }
+    </script></head
+  >
+
+  <body>
+    <section class={globalStyles["body-column"]}>
+      <article class={styles["article-container"]}>
+        <p class={styles["article-title"]}>{title}</p>
+        <section class={globalStyles["prose"]}>
+          <slot />
+        </section>
+        <p class={styles["date"]}>
+          Published {
+            pubDate.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              timeZone: "Etc/UTC",
+            })
+          }
+        </p>
+      </article>
+    </section>
+    <Sidebar homeButton={true} />
+  </body>
+
+  <!-- <script>
+    const backToTopButton = document.getElementById("top-button");
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    backToTopButton?.addEventListener("click", scrollToTop);
+  </script> -->
+</html>

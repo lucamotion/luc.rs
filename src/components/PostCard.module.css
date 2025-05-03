@@ -1,0 +1,39 @@
+.post-container {
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
+.post-container > a {
+  text-decoration: none;
+}
+
+.post-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.title-dot {
+  font-size: 1.5rem;
+  color: var(--white);
+  user-select: none;
+}
+
+.post-title {
+  color: var(--white);
+  margin: 0;
+  font-size: 1.5rem;
+  font-family: "Monomakh", system-ui;
+  font-weight: 700;
+}
+
+.post-date {
+  color: var(--gray);
+  margin: 0;
+  font-size: 1em;
+  font-family: "Figtree";
+  font-weight: 500;
+}

@@ -1,0 +1,55 @@
+---
+import "@fontsource/zcool-xiaowei";
+import "@fontsource/monomakh";
+import { getCollection } from "astro:content";
+import globalStyles from "../styles/global.module.css";
+import styles from "./index.module.css";
+import PostCard from "../components/PostCard.astro";
+import Sidebar from "../components/Sidebar.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+export type Post = (typeof posts)[number];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>luc.rs | home</title>
+  </head>
+  <body>
+    <section class={globalStyles["body-column"]}>
+      <section class={styles["header"]}>
+        <section class={styles["header-text-container"]}>
+          <p class={styles["header-title"]}>
+            luc<span><span>a</span>.rs</span>
+          </p>
+          <p class={styles["header-body"]}>
+            welcome to my corner of the internet! i'm luca, a software engineer
+            based in atlanta. i do a lot of different stuff, but my main work is
+            with discord bots!
+          </p>
+          <p class={styles["header-body"]}>
+            i'm also a music nerd and archivist, i still buy cds :p
+          </p>
+          <p class={styles["header-body"]}>
+            if you'd like to get in contact about a project, commission, or just
+            to chat, you can find me on discord <a
+              href={"discord://-/users/915329934019407872"}>@lucamotion</a
+            >!
+          </p>
+        </section>
+      </section>
+      <section class={styles["archive-container"]}>
+        <p class={globalStyles["meta-title"]}>archive</p>
+        <div class={styles["blog-posts"]}>
+          {posts.map((post) => <PostCard post={post} />)}
+        </div>
+      </section>
+    </section>
+    <Sidebar />
+  </body>
+</html>

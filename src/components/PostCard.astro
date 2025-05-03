@@ -1,0 +1,68 @@
+---
+import type { Post } from "../pages/index.astro";
+import styles from "./PostCard.module.css";
+
+interface Props {
+  post: Post;
+}
+
+const post = Astro.props.post;
+---
+
+<section class={styles["post-container"]}>
+  <span class={styles["title-dot"]}>•</span>
+  <a href={`/${post.slug}/`} draggable="false">
+    <section class={styles["post-body"]}>
+      <p class={styles["post-title"]}>{post.data.title}</p>
+      <p class={styles["post-date"]}>
+        {
+          post.data.pubDate.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            timeZone: "Etc/UTC",
+          })
+        }
+      </p>
+    </section></a
+  >
+</section>
+
+<script>
+  // thanks xetera :-)
+  import styles from "./PostCard.module.css";
+  import { annotate } from "rough-notation";
+
+  type Annotation = ReturnType<typeof annotate>;
+  const highlightColor = getComputedStyle(
+    document.documentElement
+  ).getPropertyValue("--dark-gray");
+
+  document
+    .querySelectorAll(`.${styles["post-container"]}`)
+    .forEach((article) => {
+      if (article instanceof HTMLElement) {
+        let annotation: Annotation | undefined;
+        article.addEventListener("mouseenter", (event) => {
+          if (event.target instanceof HTMLElement) {
+            const title = event.target?.querySelector(
+              `.${styles["post-title"]}`
+            );
+            if (!title) return;
+
+            annotation = annotate(title as HTMLElement, {
+              type: "highlight",
+              color: highlightColor,
+            });
+            annotation.show();
+          }
+        });
+
+        article.addEventListener("mouseleave", () => {
+          if (annotation) {
+            annotation.remove();
+          }
+        });
+      }
+    });
+</script>

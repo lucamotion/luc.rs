@@ -1,0 +1,53 @@
+.meta-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.icon {
+  width: 25rem;
+  height: 25rem;
+  border-radius: 0.5rem;
+  user-select: none;
+  min-width: 25rem;
+}
+
+.icon-credit {
+  text-decoration: none;
+  color: var(--gray);
+  font-family: "ZCOOL XiaoWei", sans-serif;
+}
+
+.icon-credit > span {
+  user-select: none;
+}
+
+.icon-credit > a {
+  text-decoration: none;
+  color: var(--gray);
+  transition: color 150ms ease-in;
+}
+
+.icon-credit > a:hover {
+  color: var(--white);
+}
+
+.signature {
+  max-height: 3rem;
+  max-width: fit-content;
+  color: var(--white);
+}
+
+.home {
+  color: var(--white);
+  text-decoration: none;
+  font-family: "Monomakh", system-ui;
+}
